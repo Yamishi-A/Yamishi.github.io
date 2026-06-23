@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Work | Portfolio</title>
+    <title>Hobby Log | Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -71,7 +71,7 @@
         .main-container {
             position: relative;
             z-index: 10;
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 4rem 2rem;
             opacity: 0;
@@ -84,10 +84,12 @@
         }
 
         header {
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-end;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1.5rem;
         }
 
         .back-btn {
@@ -95,66 +97,93 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            transition: opacity 0.2s;
+        }
+
+        .back-btn:hover {
+            opacity: 0.8;
         }
 
         h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(to right, #fff, rgba(255,255,255,0.5));
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #fff, rgba(255,255,255,0.6));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* --- Grid & Glass Cards --- */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+        .subtitle {
+            color: #8a8b92;
+            font-size: 1rem;
+            margin-top: 0.5rem;
         }
 
-        .project-card {
+        /* --- Hobby Feed List --- */
+        .hobby-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hobby-card {
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: 16px;
-            padding: 2.5rem;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
+            border-radius: 14px;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            transition: background 0.3s, border-color 0.3s, transform 0.3s;
         }
 
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(0, 223, 216, 0.4);
+        .hobby-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(0, 223, 216, 0.3);
+            transform: scale(1.01);
         }
 
-        .project-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+        .hobby-content {
+            flex: 1;
         }
 
-        .project-card p {
-            color: #b3b3b3;
+        .hobby-meta {
+            font-size: 0.8rem;
+            color: #00dfd8;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .hobby-card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .hobby-card p {
+            color: #a2a3aa;
             line-height: 1.6;
-            margin-bottom: 1.5rem;
             font-size: 0.95rem;
         }
 
-        .tech-tags span {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: rgba(255,255,255,0.05);
-            border-radius: 50px;
-            font-size: 0.8rem;
-            color: #00dfd8;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
+        .hobby-date {
+            font-size: 0.85rem;
+            color: #64656c;
+            white-space: nowrap;
+            padding-top: 0.25rem;
         }
 
         @media (max-width: 768px) {
             body { cursor: auto; }
             .custom-cursor { display: none; }
+            .hobby-card { flex-direction: column; gap: 0.5rem; padding: 1.5rem; }
+            header { flex-direction: column; align-items: flex-start; gap: 1rem; }
         }
     </style>
 </head>
@@ -169,34 +198,42 @@
 
     <main class="main-container">
         <header>
-            <h1>Selected Work</h1>
-            <a href="index.html" class="back-btn">← Back Home</a>
+            <div>
+                <h1>The Hobby Log</h1>
+                <p class="subtitle">Side projects, creative experiments, and things built just for fun.</p>
+            </div>
+            <a href="index.html" class="back-btn">← Escape to Home</a>
         </header>
 
-        <section class="project-grid">
-            <div class="project-card">
-                <h2>E-Commerce Analytics Dashboard</h2>
-                <p>A real-time data visualizer dealing with large-scale financial metrics. Built focusing heavily on render performance and sleek animations.</p>
-                <div class="tech-tags">
-                    <span>React</span><span>TypeScript</span><span>D3.js</span>
+        <section class="hobby-feed">
+            
+            <div class="hobby-card">
+                <div class="hobby-content">
+                    <div class="hobby-meta">Coding / IoT</div>
+                    <h2>Custom Mechanical Keyboard Firmware</h2>
+                    <p>Rewrote my split-keyboard layout natively in C to optimize macro latency and add custom layers for code editing shortcuts. Overkill? Probably. Fast? Absolutely.</p>
                 </div>
+                <div class="hobby-date">June 2026</div>
             </div>
 
-            <div class="project-card">
-                <h2>Decentralized Auth System</h2>
-                <p>An experimental secure authentication portal utilizing cryptographic keys. Focuses on bulletproof security practices and crisp micro-interactions.</p>
-                <div class="tech-tags">
-                    <span>Node.js</span><span>Web3</span><span>Tailwind</span>
+            <div class="hobby-card">
+                <div class="hobby-content">
+                    <div class="hobby-meta">Design / 3D</div>
+                    <h2>Procedural Glass Textures in Blender</h2>
+                    <p>Spent a weekend hyper-focusing on refraction indices to create abstract wallpaper sets. Experimenting with real-world light physics helps me understand CSS backdrop properties better.</p>
                 </div>
+                <div class="hobby-date">May 2026</div>
             </div>
 
-            <div class="project-card">
-                <h2>AI-Driven Content Pipeline</h2>
-                <p>An automated assets pipeline integrating large language models to format, optimize, and organize high-resolution creative media files.</p>
-                <div class="tech-tags">
-                    <span>Next.js</span><span>Python</span><span>OpenAI API</span>
+            <div class="hobby-card">
+                <div class="hobby-content">
+                    <div class="hobby-meta">Gaming / Automation</div>
+                    <h2>Stardew Valley Price API</h2>
+                    <p>Scraped crop value data into a tiny JSON endpoint so I could build a quick-glance calculation matrix on my secondary monitor during playthroughs.</p>
                 </div>
+                <div class="hobby-date">April 2026</div>
             </div>
+
         </section>
     </main>
 

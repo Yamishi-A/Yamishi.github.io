@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Work | Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background: #0d0e15;
+            color: #fff;
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        /* --- Background & Cursor (Matches Index) --- */
+        .background-wrapper {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            filter: blur(80px);
+        }
+
+        .blob {
+            position: absolute;
+            background: linear-gradient(135deg, #ff007f 0%, #7928ca 100%);
+            border-radius: 50%;
+            width: 500px;
+            height: 500px;
+            animation: float 20s infinite alternate ease-in-out;
+            opacity: 0.4;
+        }
+
+        .blob.blue {
+            background: linear-gradient(135deg, #00dfd8 0%, #007cf0 100%);
+            width: 600px;
+            height: 600px;
+            right: -10%;
+            top: -10%;
+            animation-duration: 25s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0px, 0px) scale(1); }
+            100% { transform: translate(50px, 80px) scale(1.1); }
+        }
+
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: invert(1);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* --- Layout --- */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            margin-bottom: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #00dfd8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #fff, rgba(255,255,255,0.5));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Grid & Glass Cards --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 223, 216, 0.4);
+        }
+
+        .project-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: #b3b3b3;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tech-tags span {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #00dfd8;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            body { cursor: auto; }
+            .custom-cursor { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="custom-cursor" id="cursor"></div>
+
+    <div class="background-wrapper">
+        <div class="blob"></div>
+        <div class="blob blue"></div>
+    </div>
+
+    <main class="main-container">
+        <header>
+            <h1>Selected Work</h1>
+            <a href="index.html" class="back-btn">← Back Home</a>
+        </header>
+
+        <section class="project-grid">
+            <div class="project-card">
+                <h2>E-Commerce Analytics Dashboard</h2>
+                <p>A real-time data visualizer dealing with large-scale financial metrics. Built focusing heavily on render performance and sleek animations.</p>
+                <div class="tech-tags">
+                    <span>React</span><span>TypeScript</span><span>D3.js</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2>Decentralized Auth System</h2>
+                <p>An experimental secure authentication portal utilizing cryptographic keys. Focuses on bulletproof security practices and crisp micro-interactions.</p>
+                <div class="tech-tags">
+                    <span>Node.js</span><span>Web3</span><span>Tailwind</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h2>AI-Driven Content Pipeline</h2>
+                <p>An automated assets pipeline integrating large language models to format, optimize, and organize high-resolution creative media files.</p>
+                <div class="tech-tags">
+                    <span>Next.js</span><span>Python</span><span>OpenAI API</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            cursor.style.left = `${cursorX}px`;
+            cursor.style.top = `${cursorY}px`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+    </script>
+</body>
+</html>

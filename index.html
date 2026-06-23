@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Portfolio</title>
+    <style>
+        /* --- Reset & Core Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #0d0e15;
+            color: #fff;
+            cursor: none; /* Hide default cursor for the custom one */
+        }
+
+        /* --- Animated Liquid Background --- */
+        .background-wrapper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            filter: blur(80px);
+        }
+
+        .blob {
+            position: absolute;
+            background: linear-gradient(135deg, #ff007f 0%, #7928ca 100%);
+            border-radius: 50%;
+            width: 500px;
+            height: 500px;
+            animation: float 20s infinite alternate ease-in-out;
+            opacity: 0.6;
+        }
+
+        .blob.blue {
+            background: linear-gradient(135deg, #00dfd8 0%, #007cf0 100%);
+            width: 600px;
+            height: 600px;
+            right: -10%;
+            top: -10%;
+            animation-duration: 25s;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+            50% { transform: translate(100px, 80px) scale(1.2) rotate(180deg); }
+            100% { transform: translate(-50px, 150px) scale(0.9) rotate(360deg); }
+        }
+
+        /* --- Custom Sticky Cursor --- */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: invert(1);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.2s, height 0.2s, background 0.2s;
+        }
+
+        /* --- Liquid Glass Container --- */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 2rem;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 24px;
+            padding: 4rem;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2),
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            
+            /* Entrance Animation */
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Typography & Elements --- */
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            color: #00dfd8;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff 30%, rgba(255,255,255,0.4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.15rem;
+            color: #b3b3b3;
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            line-height: 1.6;
+        }
+
+        /* --- Interactive Magnetic Button --- */
+        .btn-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.1s ease, box-shadow 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- Media Queries --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .glass-card { padding: 2rem; }
+            body { cursor: auto; }
+            .custom-cursor { display: none; } /* Disable custom cursor on mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="custom-cursor" id="cursor"></div>
+
+    <div class="background-wrapper">
+        <div class="blob"></div>
+        <div class="blob blue"></div>
+    </div>
+
+    <main class="main-container">
+        <div class="glass-card">
+            <span class="badge">Available for Hire</span>
+            <h1>Designing Digital Experiences That Matter.</h1>
+            <p>I build clean, high-performance, and visually striking web applications. Explore my multi-page portfolio to see my engineering mindset in action.</p>
+            
+            <div class="btn-wrapper" id="magnetic-btn">
+                <a href="projects.html" class="cta-button">View My Work</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const magneticBtn = document.getElementById('magnetic-btn');
+        const ctaButton = magneticBtn.querySelector('.cta-button');
+
+        // 1. Smooth Custom Cursor Follow Behavior
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            // Lerp (Linear Interpolation) creates the buttery smooth delay
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            
+            cursor.style.left = `${cursorX}px`;
+            cursor.style.top = `${cursorY}px`;
+            
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // 2. Magnetic Button & Sticky Cursor Effect
+        magneticBtn.addEventListener('mousemove', (e) => {
+            const rect = magneticBtn.getBoundingClientRect();
+            
+            // Calculate mouse position relative to the center of the button
+            const x = e.clientX - rect.left - (rect.width / 2);
+            const y = e.clientY - rect.top - (rect.height / 2);
+            
+            // Pull the button towards the cursor gently (magnetic effect)
+            ctaButton.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            
+            // Expand and snap the custom cursor to the button
+            cursor.style.width = '50px';
+            cursor.style.height = '50px';
+            cursor.style.background = 'rgba(255, 255, 255, 0.1)';
+            cursor.style.border = '2px solid #00dfd8';
+        });
+
+        // Reset positions when leaving the button zone
+        magneticBtn.addEventListener('mouseleave', () => {
+            ctaButton.style.transform = 'translate(0px, 0px)';
+            cursor.style.width = '20px';
+            cursor.style.height = '20px';
+            cursor.style.background = 'rgba(255, 255, 255, 0.3)';
+            cursor.style.border = 'none';
+        });
+    </script>
+</body>
+</html>
